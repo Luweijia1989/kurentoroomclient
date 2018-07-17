@@ -1,0 +1,2 @@
+# KurentoRoomClient
+KurentoRoomClient c++
