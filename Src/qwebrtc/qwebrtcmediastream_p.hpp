@@ -1,7 +1,7 @@
 #pragma once
 
 #include "qwebrtcmediastream.hpp"
-#include <webrtc/api/mediastreaminterface.h>
+#include <src/api/mediastreaminterface.h>
 #include <QList>
 #include <QSharedPointer>
 

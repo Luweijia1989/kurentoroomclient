@@ -1,10 +1,10 @@
 #pragma once
 
-#include <webrtc/modules/desktop_capture/desktop_capturer.h>
+#include <src/modules/desktop_capture/desktop_capturer.h>
 #include <QTimer>
-#include <webrtc/api/video/i420_buffer.h>
-#include <webrtc/api/video/video_frame.h>
-#include <webrtc/api/mediastreaminterface.h>
+#include <src/api/video/i420_buffer.h>
+#include <src/api/video/video_frame.h>
+#include <src/api/mediastreaminterface.h>
 #include <QObject>
 
 class QWebRTCDesktopVideoSource: public QObject, public webrtc::VideoTrackSourceInterface,
@@ -24,7 +24,7 @@ public:
 
     virtual bool is_screencast() const override;
 
-    virtual rtc::Optional<bool> needs_denoising() const override;
+    virtual absl::optional<bool> needs_denoising() const override;
 
     virtual bool GetStats(Stats* stats) override;
 

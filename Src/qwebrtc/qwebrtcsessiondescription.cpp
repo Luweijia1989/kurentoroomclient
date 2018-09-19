@@ -1,6 +1,6 @@
 #include "qwebrtcsessiondescription.hpp"
 #include "qwebrtctypes_p.hpp"
-#include <webrtc/api/jsep.h>
+#include <src/api/jsep.h>
 #include <QDebug>
 
 QWebRTCSessionDescription::SDPType QWebRTCSessionDescription_impl::type() const

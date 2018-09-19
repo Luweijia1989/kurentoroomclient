@@ -1,6 +1,6 @@
 #include <memory>
 #include <qwebrtcpeerconnectionfactory.hpp>
-#include <webrtc/api/peerconnectioninterface.h>
+#include <src/api/peerconnectioninterface.h>
 #include "qwebrtcpeerconnection_p.hpp"
 #include "qwebrtcpeerconnection.hpp"
 #include "qwebrtcmediatrack_p.hpp"
@@ -9,18 +9,22 @@
 #include "qwebrtcconfiguration.hpp"
 #include "qwebrtcdatachannel.hpp"
 #include "qwebrtcdesktopvideosource_p.hpp"
-// #include "webrtc/api/audio_codecs/builtin_audio_decoder_factory.h"
-// #include "webrtc/api/audio_codecs/builtin_audio_encoder_factory.h"
-#include "webrtc/api/test/fakeconstraints.h"
+// #include "src/api/audio_codecs/builtin_audio_decoder_factory.h"
+// #include "src/api/audio_codecs/builtin_audio_encoder_factory.h"
+#include "src/api/test/fakeconstraints.h"
 // #include "api/video_codecs/builtin_video_decoder_factory.h"
 // #include "api/video_codecs/builtin_video_encoder_factory.h"
-#include "webrtc/media/engine/webrtcvideocapturerfactory.h"
-#include "webrtc/modules/audio_device/include/audio_device.h"
-#include "webrtc/modules/audio_processing/include/audio_processing.h"
-#include "webrtc/modules/video_capture/video_capture_factory.h"
-#include "webrtc/base/checks.h"
-#include "webrtc/base/json.h"
-#include "webrtc/base/logging.h"
+#include "src/media/engine/webrtcvideocapturerfactory.h"
+#include "src/modules/audio_device/include/audio_device.h"
+#include "src/modules/audio_processing/include/audio_processing.h"
+#include "src/modules/video_capture/video_capture_factory.h"
+#include "api/audio_codecs/builtin_audio_decoder_factory.h"
+#include "api/audio_codecs/builtin_audio_encoder_factory.h"
+#include "api/video_codecs/builtin_video_decoder_factory.h"
+#include "api/video_codecs/builtin_video_encoder_factory.h"
+#include "rtc_base/checks.h"
+#include "rtc_base/json.h"
+#include "rtc_base/logging.h"
 #include <QThread>
 #include <QCoreApplication>
 #include <QMutex>
@@ -32,31 +36,17 @@ public:
 
 	QWebRTCPeerConnectionFactory_impl()
 	{
-		m_network_thread = rtc::Thread::CreateWithSocketServer();
-		if (!m_network_thread->Start()) {
-			qWarning() << "Failed to start network thread.";
-		}
-
-		m_worker_thread = rtc::Thread::Create();
-		if (!m_worker_thread->Start(this)) {
-			qWarning() << "Failed to start worker thread.";
-		}
-
-		m_signaling_thread = rtc::Thread::Create();
-		if (!m_signaling_thread->Start()) {
-			qWarning() << "Failed to start signaling thread.";
-		}
-
 		mutex.lock();
 		condition.wait(&mutex);
 
 		native_interface = webrtc::CreatePeerConnectionFactory(
-			m_network_thread.get(),
-			m_worker_thread.get(),
-			m_signaling_thread.get(),
-			nullptr,
-			nullptr,
-			nullptr);
+			nullptr /* network_thread */, nullptr /* worker_thread */,
+			nullptr /* signaling_thread */, nullptr /* default_adm */,
+			webrtc::CreateBuiltinAudioEncoderFactory(),
+			webrtc::CreateBuiltinAudioDecoderFactory(),
+			webrtc::CreateBuiltinVideoEncoderFactory(),
+			webrtc::CreateBuiltinVideoDecoderFactory(), nullptr /* audio_mixer */,
+			nullptr /* audio_processing */);
 
 		mutex.unlock();
 	}
@@ -76,11 +66,6 @@ public:
 
 public:
 	rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> native_interface;
-
-	std::unique_ptr<rtc::Thread> m_network_thread;
-	std::unique_ptr<rtc::Thread> m_worker_thread;
-	std::unique_ptr<rtc::Thread> m_signaling_thread;
-
 	rtc::scoped_refptr<webrtc::AudioDeviceModule> m_audioDeviceModule;
 
 	QMutex mutex;
@@ -152,7 +137,7 @@ QSharedPointer<QWebRTCMediaTrack> QWebRTCPeerConnectionFactory::createAudioTrack
 	m_impl->mutex.unlock();
 
 
-    auto audioSource = m_impl->native_interface->CreateAudioSource(0);
+    auto audioSource = m_impl->native_interface->CreateAudioSource(cricket::AudioOptions());
     auto audioTrack = m_impl->native_interface->CreateAudioTrack(label.toStdString(), audioSource);
     return QSharedPointer<QWebRTCMediaTrack>(new QWebRTCMediaTrack_impl(audioTrack));
 }
@@ -260,7 +245,7 @@ QSharedPointer<QWebRTCPeerConnection> QWebRTCPeerConnectionFactory::createPeerCo
         servers.push_back(iceS);
     }
     webRTCCOnfig.servers = servers;
-	webRTCCOnfig.enable_dtls_srtp = rtc::Optional<bool>(true);
+	webRTCCOnfig.enable_dtls_srtp = absl::optional<bool>(true);
     auto conn = QSharedPointer<QWebRTCPeerConnection>(new QWebRTCPeerConnection());
     conn->m_impl->m_factory = m_impl;
     conn->m_impl->_conn = m_impl->native_interface->CreatePeerConnection(webRTCCOnfig,

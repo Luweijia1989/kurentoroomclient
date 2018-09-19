@@ -1,7 +1,7 @@
 #pragma once
 
 #include "qwebrtcmediatrack.hpp"
-#include <webrtc/api/mediastreaminterface.h>
+#include <src/api/mediastreaminterface.h>
 
 class QWebRTCMediaTrack_impl : public QWebRTCMediaTrack {
     Q_OBJECT

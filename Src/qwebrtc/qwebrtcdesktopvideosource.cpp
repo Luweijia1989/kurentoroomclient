@@ -1,13 +1,13 @@
 #include "qwebrtcdesktopvideosource_p.hpp"
-#include <webrtc/modules/desktop_capture/desktop_capture_options.h>
-#include <webrtc/common_video/libyuv/include/webrtc_libyuv.h>
+#include <src/modules/desktop_capture/desktop_capture_options.h>
+#include <src/common_video/libyuv/include/webrtc_libyuv.h>
 #include <third_party/libyuv/include/libyuv/convert.h>
 #include <third_party/libyuv/include/libyuv/rotate.h>
 #include <QDebug>
 
-#pragma comment(lib,"obj/modules/desktop_capture/desktop_capture_generic.lib")
-#pragma comment(lib,"obj/modules/desktop_capture/desktop_capture_differ_sse2.lib")
-#pragma comment(lib,"obj/modules/desktop_capture/primitives.lib")
+#pragma comment(lib,"desktop_capture_generic.lib")
+#pragma comment(lib,"desktop_capture_differ_sse2.lib")
+#pragma comment(lib,"primitives.lib")
 #pragma comment(lib,"D3D11.lib")
 #pragma comment(lib,"DXGI.lib")
 
@@ -131,9 +131,9 @@ bool QWebRTCDesktopVideoSource::is_screencast() const
 	return true;
 }
 
-rtc::Optional<bool> QWebRTCDesktopVideoSource::needs_denoising() const
+absl::optional<bool> QWebRTCDesktopVideoSource::needs_denoising() const
 {
-	return rtc::Optional<bool>(false);
+	return absl::optional<bool>(false);
 }
 
 bool QWebRTCDesktopVideoSource::GetStats(webrtc::VideoTrackSourceInterface::Stats* stats)

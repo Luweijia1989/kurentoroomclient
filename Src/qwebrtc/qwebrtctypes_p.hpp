@@ -2,7 +2,7 @@
 
 #include "qwebrtcsessiondescription.hpp"
 #include "qwebrtcicecandidate.hpp"
-#include <webrtc/api/jsep.h>
+#include <src/api/jsep.h>
 
 class QWebRTCSessionDescription_impl : public QWebRTCSessionDescription {
 public:

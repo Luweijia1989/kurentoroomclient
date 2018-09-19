@@ -5,7 +5,7 @@
 #include <QSGTexture>
 #include <QOpenGLTexture>
 #include <QOpenGLContext>
-#include <webrtc/common_video/libyuv/include/webrtc_libyuv.h>
+#include <src/common_video/libyuv/include/webrtc_libyuv.h>
 #include <QMutex>
 #include <QElapsedTimer>
 

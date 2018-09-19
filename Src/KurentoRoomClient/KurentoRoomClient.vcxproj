@@ -5,22 +5,38 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
     <Keyword>Qt4VSv1.0</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
@@ -32,6 +48,7 @@
     <OutDir>$(SolutionDir)OutDir\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)IntDir\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)OutDir\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)IntDir\$(ProjectName)\$(Configuration)\</IntDir>
@@ -47,11 +64,52 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_SVG_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps/zlib;$(SolutionDir)Deps/EventEmitter;$(SolutionDir)Deps/libuv/include;$(SolutionDir)Deps/openssl/include;$(SolutionDir)Deps/jsoncpp/include;$(SolutionDir)Src/kms-jsonrpc/jsonrpc;$(SolutionDir)Src/qwebrtc;$(QTDIR)\include\QtSvg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(SolutionDir)Deps\openssl\lib;$(SolutionDir)Lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Networkd.lib;Qt5WebSocketsd.lib;Qt5Widgetsd.lib;Qt5WinExtrasd.lib;kms-jsonrpc.lib;jsoncpp.lib;Qt5Svgd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <QtMoc>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <IncludePath>.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps/zlib;$(SolutionDir)Deps/EventEmitter;$(SolutionDir)Deps/libuv/include;$(SolutionDir)Deps/openssl/include;$(SolutionDir)Deps/jsoncpp/include;$(SolutionDir)Src/kms-jsonrpc/jsonrpc;$(SolutionDir)Src/qwebrtc;$(QTDIR)\include\QtSvg;%(AdditionalIncludeDirectories)</IncludePath>
+      <Define>UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_SVG_LIB;%(PreprocessorDefinitions)</Define>
+      <ForceInclude>stdafx.h;../../%(Filename)%(Extension)</ForceInclude>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+    </QtUic>
+    <QtRcc>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+    </QtRcc>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_SVG_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -120,6 +178,41 @@
       <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
     </QtRcc>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_SVG_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps/zlib;$(SolutionDir)Deps/EventEmitter;$(SolutionDir)Deps/libuv/include;$(SolutionDir)Deps/openssl/include;$(SolutionDir)Deps/jsoncpp/include;$(SolutionDir)Src/kms-jsonrpc/jsonrpc;$(SolutionDir)Src/qwebrtc;$(QTDIR)\include\QtSvg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(SolutionDir)Deps\openssl\lib;$(SolutionDir)Lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Network.lib;Qt5WebSockets.lib;Qt5Widgets.lib;Qt5WinExtras.lib;kms-jsonrpc.lib;jsoncpp.lib;Qt5Svg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <QtMoc>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <IncludePath>.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps/zlib;$(SolutionDir)Deps/EventEmitter;$(SolutionDir)Deps/libuv/include;$(SolutionDir)Deps/openssl/include;$(SolutionDir)Deps/jsoncpp/include;$(SolutionDir)Src/kms-jsonrpc/jsonrpc;$(SolutionDir)Src/qwebrtc;$(QTDIR)\include\QtSvg;%(AdditionalIncludeDirectories)</IncludePath>
+      <Define>UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_SVG_LIB;%(PreprocessorDefinitions)</Define>
+      <ForceInclude>stdafx.h;../../%(Filename)%(Extension)</ForceInclude>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+    </QtUic>
+    <QtRcc>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+    </QtRcc>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BusyIndicator.cpp" />
     <ClCompile Include="ChatDispTextEdit.cpp" />
@@ -134,7 +227,9 @@
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Stream.cpp" />
     <ClCompile Include="WebSocketTransport.cpp" />
@@ -142,49 +237,77 @@
   <ItemGroup>
     <QtMoc Include="BusyIndicator.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
     </QtMoc>
     <QtMoc Include="ChatDispTextEdit.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc;$(QTDIR)\include\QtSvg</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc;$(QTDIR)\include\QtSvg</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_SVG_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_SVG_LIB</Define>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc;$(QTDIR)\include\QtSvg</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc;$(QTDIR)\include\QtSvg</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_SVG_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB;QT_SVG_LIB</Define>
     </QtMoc>
     <ClInclude Include="Participant.h" />
     <QtMoc Include="PeerUI.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
     </QtMoc>
     <QtMoc Include="ProxyStyle.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc;$(SolutionDir)Src\qwebrtc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
     </QtMoc>
     <ClInclude Include="Room.h" />
     <ClInclude Include="Stream.h" />
     <QtMoc Include="WebSocketTransport.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps;$(SolutionDir)Deps\zlib;$(SolutionDir)Deps\EventEmitter;$(SolutionDir)Deps\libuv\include;$(SolutionDir)Deps\openssl\include;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
     </QtMoc>
     <ClInclude Include="KurentoRoomClient.h" />
     <QtMoc Include="LoginUI.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
     </QtMoc>
     <QtMoc Include="MainUI.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;WIN32;WIN64;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWinExtras;$(SolutionDir)Deps\jsoncpp\include;$(SolutionDir)Src\kms-jsonrpc\jsonrpc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;WIN32;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_WEBSOCKETS_LIB;QT_WIDGETS_LIB;QT_WINEXTRAS_LIB</Define>
     </QtMoc>
     <ClInclude Include="FlowLayout.h" />
     <ClInclude Include="stdafx.h" />
@@ -208,7 +331,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2017" MocOptions="" />
+      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2017" Qt5Version_x0020_x64="5.11.1" MocOptions="" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <webrtc/api/peerconnectioninterface.h>
-#include <webrtc/api/jsep.h>
+#include <src/api/peerconnectioninterface.h>
+#include <src/api/jsep.h>
 //#include <webrtc/base/refcount.h>
 #include <QList>
 #include <QVariantMap>

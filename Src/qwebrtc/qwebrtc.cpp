@@ -1,9 +1,9 @@
 #include "qwebrtc.h"
 
-#include "webrtc/base/checks.h"
-#include "webrtc/base/ssladapter.h"
-#include "webrtc/base/win32socketinit.h"
-#include "webrtc/base/win32socketserver.h"
+#include "rtc_base/checks.h"
+#include "rtc_base/ssladapter.h"
+#include "rtc_base/win32socketinit.h"
+#include "rtc_base/win32socketserver.h"
 
 #ifdef _DEBUG
 #pragma comment(lib,"qtmaind.lib")

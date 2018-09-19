@@ -1,7 +1,7 @@
 #include "qwebrtcvideo_p.hpp"
 #include <QDebug>
 #include <assert.h>
-#include <webrtc/common_video/libyuv/include/webrtc_libyuv.h>
+#include <src/common_video/libyuv/include/webrtc_libyuv.h>
 #include <QMutex>
 #include <QElapsedTimer>
 

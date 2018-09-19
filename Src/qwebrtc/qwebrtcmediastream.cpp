@@ -41,5 +41,5 @@ QList<QSharedPointer<QWebRTCMediaTrack>> QWebRTCMediaStream_impl::tracks()
 
 QString QWebRTCMediaStream_impl::label()
 {
-    return QString::fromStdString(m_nativeStream->label());
+    return QString::fromStdString(m_nativeStream->id());
 }

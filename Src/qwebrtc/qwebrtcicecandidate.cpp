@@ -2,7 +2,7 @@
 #include "qwebrtctypes_p.hpp"
 #include <QDebug>
 #include <assert.h>
-#include <webrtc/api/jsepicecandidate.h>
+#include <src/api/jsepicecandidate.h>
 
 QByteArray QWebRTCIceCandidate_impl::sdp() const
 {

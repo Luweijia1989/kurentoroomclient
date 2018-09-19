@@ -5,15 +5,15 @@
 #include "qwebrtcdatachannel_p.hpp"
 #include "qwebrtctypes_p.hpp"
 #include "qwebrtcicecandidate.hpp"
-#include <webrtc/api/peerconnectioninterface.h>
-#include <webrtc/api/datachannelinterface.h>
-#include <webrtc/api/mediaconstraintsinterface.h>
-#include <webrtc/api/jsepicecandidate.h>
+#include <src/api/peerconnectioninterface.h>
+#include <src/api/datachannelinterface.h>
+#include <src/api/mediaconstraintsinterface.h>
+#include <src/api/jsepicecandidate.h>
 #include <QVariantMap>
 #include <QDebug>
 #include <assert.h>
 
-#include "webrtc/modules/video_capture/video_capture_factory.h"
+#include "src/modules/video_capture/video_capture_factory.h"
 
 void QWebRTCCreateSessionDescriptionObserver_p::OnSuccess(webrtc::SessionDescriptionInterface* desc)
 {
@@ -320,7 +320,7 @@ void QWebRTCPeerConnection_impl::OnSignalingChange(webrtc::PeerConnectionInterfa
 void QWebRTCPeerConnection_impl::OnAddStream(rtc::scoped_refptr<webrtc::MediaStreamInterface> stream) {
     auto qStream = QSharedPointer<QWebRTCMediaStream_impl>(new QWebRTCMediaStream_impl(stream));
     Q_EMIT q_ptr->streamAdded(qStream);
-    qDebug() << "Stream added " << QString::fromStdString(stream->label());
+    qDebug() << "Stream added " << QString::fromStdString(stream->id());
 }
 
 void QWebRTCPeerConnection_impl::OnRemoveStream(rtc::scoped_refptr<webrtc::MediaStreamInterface> stream)
