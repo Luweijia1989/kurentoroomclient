@@ -14,7 +14,6 @@ LoginUI::LoginUI(QWidget *parent)
 	QString url = ui.line_server->text();
 
 	kurento = std::make_shared<kurento::KurentoRoomClient>(url.toStdString());
-
 	connect(ui.btnLogin, &QPushButton::clicked, this, &LoginUI::btnJoinClicked);
 }
 

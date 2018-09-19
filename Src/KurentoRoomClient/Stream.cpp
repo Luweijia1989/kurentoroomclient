@@ -10,7 +10,7 @@
 #include <qwebrtcutilities.hpp>
 #include <qwebrtcmediatrack.hpp>
 
-const std::string const kStream_Label = "Stream_Label";
+const std::string kStream_Label = "Stream_Label";
 
 namespace kurento
 {

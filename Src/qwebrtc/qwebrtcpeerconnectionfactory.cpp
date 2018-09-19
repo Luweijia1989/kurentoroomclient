@@ -30,15 +30,12 @@
 #include <QMutex>
 #include <QWaitCondition>
 
-class QWebRTCPeerConnectionFactory_impl : public rtc::Runnable
+class QWebRTCPeerConnectionFactory_impl
 {
 public:
 
 	QWebRTCPeerConnectionFactory_impl()
 	{
-		mutex.lock();
-		condition.wait(&mutex);
-
 		native_interface = webrtc::CreatePeerConnectionFactory(
 			nullptr /* network_thread */, nullptr /* worker_thread */,
 			nullptr /* signaling_thread */, nullptr /* default_adm */,
@@ -47,21 +44,6 @@ public:
 			webrtc::CreateBuiltinVideoEncoderFactory(),
 			webrtc::CreateBuiltinVideoDecoderFactory(), nullptr /* audio_mixer */,
 			nullptr /* audio_processing */);
-
-		mutex.unlock();
-	}
-
-	virtual void Run(rtc::Thread* thread)
-	{
-		mutex.lock();
-
-// 		webrtc::AudioDeviceModule::AudioLayer audioLayer = webrtc::AudioDeviceModule::kPlatformDefaultAudio;
-// 		m_audioDeviceModule = webrtc::AudioDeviceModule::Create(0,audioLayer);
-		
-		condition.wakeAll();
-		mutex.unlock();
-
-		thread->Run();
 	}
 
 public:
@@ -69,7 +51,6 @@ public:
 	rtc::scoped_refptr<webrtc::AudioDeviceModule> m_audioDeviceModule;
 
 	QMutex mutex;
-	QWaitCondition condition;
 };
 
 //QWebRTCPeerConnectionFactory_impl::~QWebRTCPeerConnectionFactory_impl()

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "qwebrtc_global.h"
+#include "qwebrtcpeerconnectionfactory.hpp"
 
 class QWEBRTCSHARED_EXPORT QWebRTC
 {
@@ -8,6 +9,6 @@ class QWEBRTCSHARED_EXPORT QWebRTC
 public:
     QWebRTC();
 
-	static void init();
+	static QWebRTCPeerConnectionFactory* init();
 };
 

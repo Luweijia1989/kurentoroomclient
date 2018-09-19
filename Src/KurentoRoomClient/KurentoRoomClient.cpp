@@ -43,9 +43,7 @@ namespace kurento
 		_handler->addMethod("sendMessage", std::bind(&KurentoRoomClient::onNewMessage,
 			this, std::placeholders::_1, std::placeholders::_2));
 
-		
-
-		QWebRTC::init();
+		_factory.reset(QWebRTC::init());
 	}
 
 	KurentoRoomClient::~KurentoRoomClient()

@@ -87,7 +87,6 @@ void ChatDispTextEdit::appendMessage(QString msg, QString sender, bool fromMe/* 
 	fmt.setBottomMargin(0);
 	textCursor().mergeBlockFormat(fmt);
 
-	//显示昵称和时间
 	QString head;
 	head += sender;
 	head += QString(" ");
@@ -102,7 +101,6 @@ void ChatDispTextEdit::appendMessage(QString msg, QString sender, bool fromMe/* 
 	QTextCharFormat tcf;
 	textCursor().insertBlock(fmt, tcf);
 
-	//光标移植末尾并插入2个空格
 	slotAppedSpace(2);
 	slotFont(QString::fromStdWString(L"Microsoft YaHei"));
 	slotSize(14);

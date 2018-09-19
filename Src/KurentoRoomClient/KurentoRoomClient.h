@@ -33,7 +33,7 @@ namespace kurento
 		Room* room(const Options& options);
 		Stream* stream(Room* room, bool audio,bool video,bool data);
 
-	protected:
+	public:
 		QSharedPointer<QWebRTCPeerConnectionFactory> getFactory();
 		QSharedPointer<QWebRTCPeerConnection> WebRtcPeerSendonly();
 		QSharedPointer<QWebRTCPeerConnection> WebRtcPeerRecvonly();

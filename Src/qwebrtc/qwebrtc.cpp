@@ -25,8 +25,6 @@
 #pragma comment(lib,"Secur32.lib")
 #pragma comment(lib,"wmcodecdspuuid.lib")
 
-
-
 static rtc::Win32Thread *w32_thread = nullptr;
 static rtc::Win32SocketServer *w32_ss = nullptr;
 
@@ -34,15 +32,14 @@ QWebRTC::QWebRTC()
 {
 }
 
-void QWebRTC::init()
+QWebRTCPeerConnectionFactory* QWebRTC::init()
 {
-// 	if (!w32_thread)
-// 	{
-// 		w32_ss = new rtc::Win32SocketServer;
-// 		w32_thread = new rtc::Win32Thread(w32_ss);
-// 	}
 	rtc::EnsureWinsockInit();
-//	rtc::ThreadManager::Instance()->SetCurrentThread(w32_thread);
+	rtc::Win32SocketServer w32_ss;
+	rtc::Win32Thread w32_thread(&w32_ss);
+	rtc::ThreadManager::Instance()->SetCurrentThread(&w32_thread);
 	
 	rtc::InitializeSSL();
+	
+	return new QWebRTCPeerConnectionFactory();
 }

@@ -10,7 +10,6 @@ class BusyIndicator;
 class LoginUI : public QWidget
 {
 	Q_OBJECT
-
 public:
 	LoginUI(QWidget *parent = Q_NULLPTR);
 	~LoginUI();
