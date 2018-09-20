@@ -36,9 +36,19 @@ public:
 
 	QWebRTCPeerConnectionFactory_impl()
 	{
+		m_worker_thread = rtc::Thread::Create();
+		if (!m_worker_thread->Start()) {
+			qWarning() << "Failed to start worker thread.";
+		}
+
+		m_signaling_thread = rtc::Thread::Create();
+		if (!m_signaling_thread->Start()) {
+			qWarning() << "Failed to start signaling thread.";
+		}
+
 		native_interface = webrtc::CreatePeerConnectionFactory(
-			nullptr /* network_thread */, nullptr /* worker_thread */,
-			nullptr /* signaling_thread */, nullptr /* default_adm */,
+			nullptr /* network_thread */, m_worker_thread.get() /* worker_thread */,
+			m_signaling_thread.get() /* signaling_thread */, nullptr /* default_adm */,
 			webrtc::CreateBuiltinAudioEncoderFactory(),
 			webrtc::CreateBuiltinAudioDecoderFactory(),
 			webrtc::CreateBuiltinVideoEncoderFactory(),
@@ -49,7 +59,8 @@ public:
 public:
 	rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> native_interface;
 	rtc::scoped_refptr<webrtc::AudioDeviceModule> m_audioDeviceModule;
-
+	std::unique_ptr<rtc::Thread> m_worker_thread;
+	std::unique_ptr<rtc::Thread> m_signaling_thread;
 	QMutex mutex;
 };
 

@@ -1,10 +1,13 @@
 #include "stdafx.h"
 #include "LoginUI.h"
 #include "ProxyStyle.h"
+#include "qwebrtc.h"
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
+
+	QWebRTC::init();
 
 	//加载qss文件
 	QFile qssfile(":/qss/Resources/main.qss");

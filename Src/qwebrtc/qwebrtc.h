@@ -9,6 +9,6 @@ class QWEBRTCSHARED_EXPORT QWebRTC
 public:
     QWebRTC();
 
-	static QWebRTCPeerConnectionFactory* init();
+	static void init();
 };
 
