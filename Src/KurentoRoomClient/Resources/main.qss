@@ -1,0 +1,253 @@
+*{
+	font-family: Arial,"Microsoft YaHei","Segoe UI Emoji" ;
+	font-size: 10pt;
+}
+
+QScrollBar:vertical {
+    background:transparent;
+    width: 8px;
+    margin: 0px 0 0px 0;
+}
+QScrollBar::handle:vertical{
+    background: rgba(0,0,0,38);
+    min-height: 20px;
+    border-radius: 4px;
+    border: none;
+}
+QScrollBar::handle:vertical:hover{  
+	background: rgba(0,0,0,64);
+ } 
+QScrollBar::handle:vertical:pressed {  
+	background: rgba(0,0,0,64);
+ }
+QScrollBar::add-line:vertical {
+    height: 0px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+QScrollBar::sub-line:vertical {
+    height: 0px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+QScrollBar::up-arrow:vertical, 
+QScrollBar::down-arrow:vertical {
+    border: 1px solid grey;
+    width: 4px;
+    height: 4px;
+    background: white;
+}
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+QComboBox
+{
+	border:1px solid rgb(0, 170, 255);
+	height:30px;
+	border-radius:2px;
+	selection-color:black;
+}
+
+/*************************LoginUI*************************/
+#LoginUI #label_logo
+{
+	border-image:url(:/image/Resources/logo.png);
+}
+
+#LoginUI QLineEdit
+{
+	border:1px solid rgb(0, 170, 255);
+	height:30px;
+	border-radius:2px;
+}
+
+#LoginUI QLineEdit[error="true"]
+{
+	border:1px solid #b74d46;
+	height:30px;
+	border-radius:2px;
+}
+
+#LoginUI #btnLogin
+{
+	height:30px;
+	color: rgb(255, 255, 255);
+	border-radius:2px;
+	background-color: rgb(45, 208, 207);
+}
+
+#LoginUI #btnLogin:hover
+{
+	background-color:rgb(32, 150, 148);
+}
+#LoginUI #btnLogin:disabled
+{
+	background-color:rgb(107, 107, 107);
+}
+
+/*************************LoginUI*************************/
+
+/*************************MainUI**************************/
+#MainUI #widget_logo
+{
+	background-color: rgb(1, 126, 188);
+}
+
+#MainUI #label_logo
+{
+	color:rgb(229,229,229);
+	font-size:14px;
+	font-weight:bold;
+}
+
+#MainUI #widget_top
+{
+	background-color: rgb(13, 106, 173);
+}
+
+#MainUI #widget_left
+{
+	background-color: rgb(0, 26, 53);
+}
+
+#MainUI #widget_chat
+{
+	background-color: rgb(199, 237, 204);
+}
+
+#MainUI #scrollArea_display
+{
+	border:none;
+}
+
+#MainUI #widget_work
+{
+	background-color: rgb(220, 218, 218);
+}
+
+#MainUI #list_local
+{	
+	border:none;
+	background:transparent;
+}
+
+#MainUI #widget_left QLabel
+{
+	color:rgb(229,229,229);
+	font-size:14px;
+	font-weight:bold;
+}
+
+#MainUI #line_room,
+#MainUI #line_user
+{
+	border:none;
+	color:white;
+	font-size:14px;
+	font-weight:bold;
+	text-decoration: underline;
+	background:transparent;
+}
+
+#MainUI #line_text
+{
+	border:1px solid rgb(0, 170, 255);
+	height:30px;
+	color:black;
+	border-radius:2px;
+}
+
+#MainUI #text_dispaly
+{
+	border:none;
+}
+
+#MainUI #widget_top_func QLabel
+{
+	color:white;
+	font-size:14px;
+	font-weight:bold;
+}
+
+#MainUI #btn_quit
+{
+	border:none;
+	color:white;
+	font-size:14px;
+	font-weight:bold;
+}
+#MainUI #btn_quit:hover
+{
+	text-decoration: underline;
+}
+#MainUI #btn_quit:pressed
+{
+	text-decoration: underline;
+	padding-top:2px;
+}
+
+#MainUI #scrollArea_remote
+{
+	border:none;
+}
+
+#MainUI #btn_push_video,
+#MainUI #btn_push_audio,
+#MainUI #btn_send
+{
+	height:30px;
+	color: rgb(255, 255, 255);
+	border-radius:2px;
+	background-color: rgb(45, 208, 207);
+}
+#MainUI #btn_push_video:hover,
+#MainUI #btn_push_audio:hover,
+#MainUI #btn_send:hover
+{
+	background-color:rgb(32, 150, 148);
+}
+#MainUI #btn_push_video:disabled,
+#MainUI #btn_push_audio:disabled,
+#MainUI #btn_send:disabled
+{
+	background-color:rgb(107, 107, 107);
+}
+
+/*************************MainUI**************************/
+#label_render
+{
+	background-color:rgb(214,229,246);
+}
+
+#label_size,
+#label_name
+{
+	border:none;
+	color:white;
+	font-size:12px;
+	border-radius:10px;
+	background-color:rgba(0,0,0,40%);
+}
+
+#btn_fullScreen{
+	border:none;
+	border-image: url(:/image/Resources/icon_maximize_normal.png);
+}
+#btn_fullScreen:hover:!pressed{
+	border-image: url(:/image/Resources/icon_maximize_hover.png);
+}
+#btn_fullScreen:pressed{
+	border-image: url(:/image/Resources/icon_maximize_click.png);
+}
+#btn_fullScreen:checked{
+	border:none;
+	border-image: url(:/image/Resources/icon_restore_normal.png);
+}
+#btn_fullScreen:checked:hover:!pressed{
+	border-image: url(:/image/Resources/icon_restore_hover.png);
+}
+#btn_fullScreen:checked:pressed{
+	border-image: url(:/image/Resources/icon_restore_click.png);
+}

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/KurentoRoomClient"/>
+    <qresource prefix="/qss">
+        <file>Resources/main.qss</file>
+    </qresource>
+    <qresource prefix="/image">
+        <file>Resources/logo.png</file>
+        <file>Resources/Double Ring.svg</file>
+    </qresource>
+</RCC>
