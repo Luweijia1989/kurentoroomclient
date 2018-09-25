@@ -14,12 +14,13 @@ class QWebRTCConfiguration;
 class QWEBRTCSHARED_EXPORT QWebRTCPeerConnectionFactory : public QObject {
 public:
     QWebRTCPeerConnectionFactory();
+	~QWebRTCPeerConnectionFactory();
 
     QSharedPointer<QWebRTCMediaTrack> createAudioTrack(const QVariantMap& constraints, const QString& trackId = QString());
 
     QSharedPointer<QWebRTCMediaTrack> createVideoTrack(const QVariantMap& constraints, const QString& trackId = QString());
 
-    //QSharedPointer<QWebRTCMediaTrack> createScreenCaptureTrack(const QVariantMap& constraints, const QString& trackId = QString());
+    QSharedPointer<QWebRTCMediaTrack> createScreenCaptureTrack(const QVariantMap& constraints, const QString& trackId = QString());
 
     QSharedPointer<QWebRTCMediaStream> createMediaStream(const QString& label);
 

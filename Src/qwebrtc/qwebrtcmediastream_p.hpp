@@ -8,6 +8,7 @@
 class QWebRTCMediaStream_impl : public QWebRTCMediaStream {
 public:
     explicit QWebRTCMediaStream_impl(const rtc::scoped_refptr<webrtc::MediaStreamInterface>& stream);
+	~QWebRTCMediaStream_impl();
 
     virtual void addTrack(const QSharedPointer<QWebRTCMediaTrack>&) override;
     virtual void removeTrack(const QSharedPointer<QWebRTCMediaTrack>&) override;

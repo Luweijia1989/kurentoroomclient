@@ -22,5 +22,7 @@ int main(int argc, char *argv[])
 
 	LoginUI *w = new LoginUI;
 	w->show();
-	return a.exec();
+	int ret = a.exec();
+	QWebRTC::clean();
+	return ret;
 }

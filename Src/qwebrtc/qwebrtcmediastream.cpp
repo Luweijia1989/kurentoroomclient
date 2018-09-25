@@ -1,5 +1,6 @@
 #include "qwebrtcmediastream_p.hpp"
 #include "qwebrtcmediatrack_p.hpp"
+#include <QDebug>
 
 QWebRTCMediaStream_impl::QWebRTCMediaStream_impl(const rtc::scoped_refptr<webrtc::MediaStreamInterface>& stream)
     : m_nativeStream(stream)
@@ -10,6 +11,11 @@ QWebRTCMediaStream_impl::QWebRTCMediaStream_impl(const rtc::scoped_refptr<webrtc
     for (auto audioTrack : stream->GetAudioTracks()) {
         m_tracks.append(QSharedPointer<QWebRTCMediaTrack_impl>(new QWebRTCMediaTrack_impl(audioTrack)));
     }
+}
+
+QWebRTCMediaStream_impl::~QWebRTCMediaStream_impl()
+{
+	qDebug() << "QWebRTCMediaStream_impl destoryed...";
 }
 
 void QWebRTCMediaStream_impl::addTrack(const QSharedPointer<QWebRTCMediaTrack>& track)

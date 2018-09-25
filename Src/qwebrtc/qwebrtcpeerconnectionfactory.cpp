@@ -9,11 +9,7 @@
 #include "qwebrtcconfiguration.hpp"
 #include "qwebrtcdatachannel.hpp"
 #include "qwebrtcdesktopvideosource_p.hpp"
-// #include "src/api/audio_codecs/builtin_audio_decoder_factory.h"
-// #include "src/api/audio_codecs/builtin_audio_encoder_factory.h"
 #include "src/api/test/fakeconstraints.h"
-// #include "api/video_codecs/builtin_video_decoder_factory.h"
-// #include "api/video_codecs/builtin_video_encoder_factory.h"
 #include "src/media/engine/webrtcvideocapturerfactory.h"
 #include "src/modules/audio_device/include/audio_device.h"
 #include "src/modules/audio_processing/include/audio_processing.h"
@@ -54,6 +50,19 @@ public:
 			webrtc::CreateBuiltinVideoEncoderFactory(),
 			webrtc::CreateBuiltinVideoDecoderFactory(), nullptr /* audio_mixer */,
 			nullptr /* audio_processing */);
+
+ 		//webrtc::AudioDeviceModule::AudioLayer audioLayer = webrtc::AudioDeviceModule::kPlatformDefaultAudio;
+ 		//m_audioDeviceModule = webrtc::AudioDeviceModule::Create(0,audioLayer);
+	}
+
+	~QWebRTCPeerConnectionFactory_impl()
+	{
+		native_interface = nullptr;
+		m_worker_thread->Quit();
+		m_signaling_thread->Quit();
+		m_worker_thread = nullptr;
+		m_signaling_thread = nullptr;
+		qDebug() << "QWebRTCPeerConnectionFactory_impl destroyed...";
 	}
 
 public:
@@ -86,6 +95,11 @@ QWebRTCPeerConnectionFactory::QWebRTCPeerConnectionFactory()
     qRegisterMetaType<QSharedPointer<QWebRTCMediaStream> >();
     qRegisterMetaType<QSharedPointer<QWebRTCDataChannel> >();
     m_impl = QSharedPointer<QWebRTCPeerConnectionFactory_impl>(new QWebRTCPeerConnectionFactory_impl());
+}
+
+QWebRTCPeerConnectionFactory::~QWebRTCPeerConnectionFactory()
+{
+	qDebug() << "QWebRTCPeerConnectionFactory destroyed...";
 }
 
 QSharedPointer<QWebRTCMediaTrack> QWebRTCPeerConnectionFactory::createAudioTrack(const QVariantMap& constraints, const QString& label)
@@ -197,24 +211,23 @@ QSharedPointer<QWebRTCMediaTrack> QWebRTCPeerConnectionFactory::createVideoTrack
     return QSharedPointer<QWebRTCMediaTrack>(new QWebRTCMediaTrack_impl(videoTrack, videoSource));
 }
 
-// QSharedPointer<QWebRTCMediaTrack> QWebRTCPeerConnectionFactory::createScreenCaptureTrack(const QVariantMap& constraints, const QString& label)
-// {
-// 
-// 	auto videoSource = new rtc::RefCountedObject<QWebRTCDesktopVideoSource>();
-// 	if (constraints.contains("ExcludedWindow"))
-// 	{
-// 		uint32_t window = constraints["ExcludedWindow"].toUInt();
-// 		if (window)
-// 		{
-// 			videoSource->SetExcludedWindow(window);
-// 		}
-// 	}
-// 
-// 	videoSource->moveToThread(QCoreApplication::instance()->thread());
-// 	videoSource->Start();
-// 	auto videoTrack = m_impl->native_interface->CreateVideoTrack(label.toStdString(), videoSource);
-// 	return QSharedPointer<QWebRTCMediaTrack>(new QWebRTCMediaTrack_impl(videoTrack, videoSource));
-// }
+ QSharedPointer<QWebRTCMediaTrack> QWebRTCPeerConnectionFactory::createScreenCaptureTrack(const QVariantMap& constraints, const QString& label)
+ {
+ 
+ 	auto videoSource = new rtc::RefCountedObject<QWebRTCDesktopVideoSource>();
+ 	if (constraints.contains("ExcludedWindow"))
+ 	{
+ 		uint32_t window = constraints["ExcludedWindow"].toUInt();
+ 		if (window)
+ 		{
+ 			videoSource->SetExcludedWindow(window);
+ 		}
+ 	}
+ 
+ 	videoSource->Start();
+ 	auto videoTrack = m_impl->native_interface->CreateVideoTrack(label.toStdString(), videoSource);
+ 	return QSharedPointer<QWebRTCMediaTrack>(new QWebRTCMediaTrack_impl(videoTrack, videoSource));
+ }
 
 QSharedPointer<QWebRTCMediaStream> QWebRTCPeerConnectionFactory::createMediaStream(const QString& label)
 {

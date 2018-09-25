@@ -10,5 +10,6 @@ public:
     QWebRTC();
 
 	static void init();
+	static void clean();
 };
 

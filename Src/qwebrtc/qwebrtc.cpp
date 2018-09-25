@@ -32,9 +32,10 @@ QWebRTC::QWebRTC()
 void QWebRTC::init()
 {
 	rtc::EnsureWinsockInit();
-	rtc::Win32SocketServer w32_ss;
-	rtc::Win32Thread w32_thread(&w32_ss);
-	rtc::ThreadManager::Instance()->SetCurrentThread(&w32_thread);
-	
 	rtc::InitializeSSL();
+}
+
+void QWebRTC::clean()
+{
+	rtc::CleanupSSL();
 }
