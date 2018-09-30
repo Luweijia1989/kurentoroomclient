@@ -290,6 +290,18 @@ QWebRTCPeerConnection::IceGatheringState QWebRTCPeerConnection::iceGatheringStat
     return static_cast<QWebRTCPeerConnection::IceGatheringState>(m_impl->_conn->ice_gathering_state());
 }
 
+void QWebRTCPeerConnection::setBandwidthLimitation(int min, int max)
+{
+	assert(m_impl);
+	assert(m_impl->_conn);
+
+	webrtc::BitrateSettings settings;
+	settings.max_bitrate_bps = max;
+	settings.min_bitrate_bps = min;
+	settings.start_bitrate_bps = min;
+	webrtc::RTCError erro = m_impl->_conn->SetBitrate(settings);
+}
+
 QWebRTCPeerConnection::QWebRTCPeerConnection()
     : m_impl(new QWebRTCPeerConnection_impl(this))
 {

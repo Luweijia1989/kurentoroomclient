@@ -90,6 +90,11 @@ namespace kurento
 // 			_peerSend = getFactory()->createPeerConnection(configuration);
 // 		}
 		QWebRTCConfiguration configuration;
+		QWebRTCIceServer server;
+		server.username = "luweijia";
+		server.password = "123456";
+		server.urls.append("turn:139.196.83.170:3478");
+		configuration.iceServers.append(server);
 		return getFactory()->createPeerConnection(configuration);
 	}
 
@@ -103,6 +108,11 @@ namespace kurento
 // 
 // 		return _peerRecv;
 		QWebRTCConfiguration configuration;
+		QWebRTCIceServer server;
+		server.username = "luweijia";
+		server.password = "123456";
+		server.urls.append("turn:139.196.83.170:3478");
+		configuration.iceServers.append(server);
 		return getFactory()->createPeerConnection(configuration);
 	}
 

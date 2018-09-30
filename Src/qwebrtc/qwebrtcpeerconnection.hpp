@@ -78,6 +78,8 @@ public:
     IceConnectionState iceConnectionState();
     IceGatheringState iceGatheringState();
 
+	void setBandwidthLimitation(int min, int max);
+
     ~QWebRTCPeerConnection();
 Q_SIGNALS:
     void signalingChange();

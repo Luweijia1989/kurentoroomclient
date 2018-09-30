@@ -48,7 +48,7 @@
       </size>
      </property>
      <property name="text">
-      <string>wss://192.168.7.235:8443/room</string>
+      <string>wss://139.196.83.170:8443/room</string>
      </property>
      <property name="readOnly">
       <bool>false</bool>

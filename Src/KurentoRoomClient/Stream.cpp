@@ -129,6 +129,8 @@ namespace kurento
 			_peer->addStream(_stream);
 
 			QVariantMap offerOptions;
+			offerOptions["receiveVideo"] = false;
+			offerOptions["receiveAudio"] = false;
 			_peer->createOfferForConstraints(offerOptions, [=](const QSharedPointer<QWebRTCSessionDescription>& desc)
 			{
 				setLocalDescription(desc);
@@ -136,7 +138,7 @@ namespace kurento
 		}
 		else {
 
-			_peer = kurento->WebRtcPeerRecvonly();
+			_peer = kurento->WebRtcPeerRecvonly(); //没有把本地的stream加上去就是recvonly了
 			QObject::connect(_peer.data(), &QWebRTCPeerConnection::streamAdded,
 				[=](const QSharedPointer<QWebRTCMediaStream>& stream) {
 				_stream = stream;
